@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [advocates, setAdvocates] = useState([]);
   const [filteredAdvocates, setFilteredAdvocates] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     console.log("fetching advocates...");
@@ -16,10 +17,9 @@ export default function Home() {
     });
   }, []);
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchTerm = e.target.value;
-
-    document.getElementById("search-term").innerHTML = searchTerm;
+    setSearchTerm(searchTerm);
 
     console.log("filtering advocates...");
     const filteredAdvocates = advocates.filter((advocate) => {
@@ -41,6 +41,15 @@ export default function Home() {
     setFilteredAdvocates(advocates);
   };
 
+  // Temp corral for components I'm making, todo: extract them out into their own files
+  function SearchLabel({ searchString }: { searchString: string }) {
+    return (
+      <p>
+        Searching for: <span> {searchString} </span>
+      </p>
+    );
+  }
+
   return (
     <main style={{ margin: "24px" }}>
       <h1>Solace Advocates</h1>
@@ -48,9 +57,7 @@ export default function Home() {
       <br />
       <div>
         <p>Search</p>
-        <p>
-          Searching for: <span id="search-term"></span>
-        </p>
+        <SearchLabel searchString={searchTerm} />
         <input style={{ border: "1px solid black" }} onChange={onChange} />
         <button onClick={onClick}>Reset Search</button>
       </div>
