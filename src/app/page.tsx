@@ -57,8 +57,11 @@ export default function Home() {
   };
 
   const onResetSearchClick = () => {
+    console.log("resetting search...");
     console.log(advocates);
+
     setFilteredAdvocates(advocates);
+    setSearchTerm("");
   };
 
   // Temp corral for components I'm making, todo: extract them out into their own files
@@ -76,10 +79,19 @@ export default function Home() {
       <br />
       <br />
       <div>
-        <p>Search</p>
         <SearchLabel searchString={searchTerm} />
-        <input style={{ border: "1px solid black" }} onChange={onChange} />
-        <button onClick={onResetSearchClick}>Reset Search</button>
+        <input
+          className="px-4 py-2 border border-gray-300 rounded-md"
+          value={searchTerm}
+          onChange={onChange}
+          placeholder="Search"
+        />
+        <button
+          className="mx-4 my-2 px-4 py-2 border rounded-full"
+          onClick={onResetSearchClick}
+        >
+          Reset Search
+        </button>
       </div>
       <br />
       <br />
