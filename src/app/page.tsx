@@ -35,16 +35,22 @@ export default function Home() {
 
     console.log("filtering advocates...");
     const filteredAdvocates = advocates.filter((advocate) => {
-      return (
+      // Note: we are delaying searching specialties for performance
+      if (
         advocate.firstName.toLowerCase().includes(newSearchTerm) ||
         advocate.lastName.toLowerCase().includes(newSearchTerm) ||
         advocate.city.toLowerCase().includes(newSearchTerm) ||
         advocate.degree.toLowerCase().includes(newSearchTerm) ||
-        advocate.specialties.includes(newSearchTerm) ||
         (!isNaN(Number(newSearchTerm)) &&
           advocate.yearsOfExperience >= Number(newSearchTerm))
-      );
-      // todo: search through array of specialties, need to go one layer deeper
+      ) {
+        return true;
+      } else {
+        const specialities = advocate.specialties;
+        return specialities.some((specialty) => {
+          return specialty.toLowerCase().includes(newSearchTerm);
+        });
+      }
     });
 
     setFilteredAdvocates(filteredAdvocates);

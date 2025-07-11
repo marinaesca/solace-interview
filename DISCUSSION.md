@@ -30,6 +30,9 @@
   See more info here: https://nextjs.org/docs/messages/react-hydration-error
 
 - Glaring bug no 6.
+  Warning: Each child in a list should have a unique "key" prop.
+
+- Glaring bug no 7.
   The reset search button is not functional
 
 2. Improve the design UI/UX to make the experience better for prospective patients. We value design heavily at Solace so feel free to flex your skills in this area. The repo is set up with tailwind but feel free to use any styling framework you’d like.
@@ -41,6 +44,7 @@ My thought process notes:
 
 - To start I am going to use the default list of returned advocates while I do an read through of the codebase, and prelimiary functionality play through with the app. Then I will configure the database and see what further bugs and info I run into.
 - Added a type for Advocate (based on the schema), and added typing to the useStates.
+- Search: I changed the logic for years of experience to be GTE for a user experience that makes more sense. I also split the search against all fields except specialities to happen first, and early return if we get a match. Then we filter based on the sub array of specialties. This is for better performance, to avoid iterating over each advocate's list of specialities each time we search.
 
 ---
 
