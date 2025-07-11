@@ -21,19 +21,21 @@
 - [x] Glaring bug no 4.
       "Search does not work"
       I was testing using "doe" which due to case insensitivity was not capturing "Doe". Updated logic
-      to be case insensitive.
+      to be case insensitive. Updated specialties to actually search within the array of specialties.
 
-- Glaring bug no 5.
+- [x] Glaring bug no 5.
+      The reset search button is not functional
+      Updated reset button to update the search term label, and updated the search input to correctly
+      track current search term.
+
+- Glaring bug no 6.
   Unhandled Runtime Error
 
   Error: Hydration failed because the initial UI does not match what was rendered on the server.
   See more info here: https://nextjs.org/docs/messages/react-hydration-error
 
-- Glaring bug no 6.
-  Warning: Each child in a list should have a unique "key" prop.
-
 - Glaring bug no 7.
-  The reset search button is not functional
+  Warning: Each child in a list should have a unique "key" prop.
 
 2. Improve the design UI/UX to make the experience better for prospective patients. We value design heavily at Solace so feel free to flex your skills in this area. The repo is set up with tailwind but feel free to use any styling framework you’d like.
 3. Consider both frontend and backend performance improvements. Assume we have a database of hundreds of thousands of advocates we need to search through.
