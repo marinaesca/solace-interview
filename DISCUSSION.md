@@ -28,14 +28,19 @@
       Updated reset button to update the search term label, and updated the search input to correctly
       track current search term.
 
-- Glaring bug no 6.
-  Unhandled Runtime Error
+- [x] Glaring bug no 6.
+      Unhandled Runtime Error
+      Error: Hydration failed because the initial UI does not match what was rendered on the server.
+      See more info here: https://nextjs.org/docs/messages/react-hydration-error
+      Warning: In HTML, <th> cannot be a child of <thead>.
+      This will cause a hydration error.
 
-  Error: Hydration failed because the initial UI does not match what was rendered on the server.
-  See more info here: https://nextjs.org/docs/messages/react-hydration-error
+      The table head was missing the <tr> row.
 
-- Glaring bug no 7.
-  Warning: Each child in a list should have a unique "key" prop.
+- [x] Glaring bug no 7.
+      Warning: Each child in a list should have a unique "key" prop.
+
+      Added keys to each use of .map()
 
 2. Improve the design UI/UX to make the experience better for prospective patients. We value design heavily at Solace so feel free to flex your skills in this area. The repo is set up with tailwind but feel free to use any styling framework you’d like.
 3. Consider both frontend and backend performance improvements. Assume we have a database of hundreds of thousands of advocates we need to search through.
@@ -47,6 +52,7 @@ My thought process notes:
 - To start I am going to use the default list of returned advocates while I do an read through of the codebase, and prelimiary functionality play through with the app. Then I will configure the database and see what further bugs and info I run into.
 - Added a type for Advocate (based on the schema), and added typing to the useStates.
 - Search: I changed the logic for years of experience to be GTE for a user experience that makes more sense. I also split the search against all fields except specialities to happen first, and early return if we get a match. Then we filter based on the sub array of specialties. This is for better performance, to avoid iterating over each advocate's list of specialities each time we search.
+-
 
 ---
 
