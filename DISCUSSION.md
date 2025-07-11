@@ -52,11 +52,11 @@ My thought process notes:
 - To start I am going to use the default list of returned advocates while I do an read through of the codebase, and prelimiary functionality play through with the app. Then I will configure the database and see what further bugs and info I run into.
 - Added a type for Advocate (based on the schema), and added typing to the useStates.
 - Search: I changed the logic for years of experience to be GTE for a user experience that makes more sense. I also split the search against all fields except specialities to happen first, and early return if we get a match. Then we filter based on the sub array of specialties. This is for better performance, to avoid iterating over each advocate's list of specialities each time we search.
--
+- ***
 
----
+Other things I would do if I had spent more time:
 
-Other concerns:
+- Extract out components I created from page.tsx into their own files!
 
 - Security for dotenv: I would replace the .env with an .env-example with instructions to engineers to copy the file and rename it as .env. And then instructions on obtaining secrets from other developers or a shared team secrets/passwords manager.
 
