@@ -2,10 +2,21 @@
 
 import { useEffect, useState } from "react";
 
+type Advocate = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  city: string;
+  degree: string;
+  specialties: string[];
+  yearsOfExperience: number;
+  phoneNumber: number;
+};
+
 export default function Home() {
-  const [advocates, setAdvocates] = useState([]);
-  const [filteredAdvocates, setFilteredAdvocates] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [advocates, setAdvocates] = useState<Advocate[]>([]);
+  const [filteredAdvocates, setFilteredAdvocates] = useState<Advocate[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
     console.log("fetching advocates...");
@@ -18,25 +29,28 @@ export default function Home() {
   }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const searchTerm = e.target.value;
-    setSearchTerm(searchTerm);
+    let newSearchTerm = e.target.value;
+    setSearchTerm(newSearchTerm);
+    newSearchTerm = newSearchTerm.toLowerCase();
 
     console.log("filtering advocates...");
     const filteredAdvocates = advocates.filter((advocate) => {
       return (
-        advocate.firstName.includes(searchTerm) ||
-        advocate.lastName.includes(searchTerm) ||
-        advocate.city.includes(searchTerm) ||
-        advocate.degree.includes(searchTerm) ||
-        advocate.specialties.includes(searchTerm) ||
-        advocate.yearsOfExperience.includes(searchTerm)
+        advocate.firstName.toLowerCase().includes(newSearchTerm) ||
+        advocate.lastName.toLowerCase().includes(newSearchTerm) ||
+        advocate.city.toLowerCase().includes(newSearchTerm) ||
+        advocate.degree.toLowerCase().includes(newSearchTerm) ||
+        advocate.specialties.includes(newSearchTerm) ||
+        (!isNaN(Number(newSearchTerm)) &&
+          advocate.yearsOfExperience >= Number(newSearchTerm))
       );
+      // todo: search through array of specialties, need to go one layer deeper
     });
 
     setFilteredAdvocates(filteredAdvocates);
   };
 
-  const onClick = () => {
+  const onResetSearchClick = () => {
     console.log(advocates);
     setFilteredAdvocates(advocates);
   };
@@ -59,7 +73,7 @@ export default function Home() {
         <p>Search</p>
         <SearchLabel searchString={searchTerm} />
         <input style={{ border: "1px solid black" }} onChange={onChange} />
-        <button onClick={onClick}>Reset Search</button>
+        <button onClick={onResetSearchClick}>Reset Search</button>
       </div>
       <br />
       <br />
